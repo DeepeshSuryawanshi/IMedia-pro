@@ -1,16 +1,11 @@
-// components/Navbar.tsx
 'use client';
-
 import { Home, Search, PlusSquare, MessageCircle, Heart, User } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeToggle } from './TheamToggle';
-import logoWhite from '../../public/white_logo.svg'
-import logoBlack from '../../public/black_logo.svg'
-
 const navItems = [
   { label: 'Home', icon: <Home size={26} />, href: '/' },
   { label: 'Search', icon: <Search size={26} />, href: '/search' },
@@ -23,12 +18,14 @@ const navItems = [
 export default function   Navbar() {
   const [active, setActive] = useState('/');
   const { theme, setTheme } = useTheme();
-
-console.log(theme)
+  const [Logo, setLogo] = useState<string>(theme === 'dark'? '/white_logo.svg' : '/black_logo.svg' )
+  useEffect(()=>{
+    theme === 'dark' ?setLogo('/white_logo.svg'):setLogo('/black_logo.svg')
+  },[theme])
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 dark:bg-black border-t border-gray-900 md:top-0 md:bottom-auto md:w-55 md:h-screen md:border-r">
       <div className='w-full p-4 hidden md:flex'>
-          <Image src={theme === 'dark' ?logoWhite:logoBlack} alt='Logo' height={37} width={163} />
+          <Image src={Logo} alt='Logo' height={37} width={163} />
       </div>
       <ul className="w-full flex justify-around md:flex-col md:justify-start md:items-center p-2 gap-4">
         {navItems.map((item) => (

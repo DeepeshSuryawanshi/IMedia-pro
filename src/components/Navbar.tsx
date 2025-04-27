@@ -18,7 +18,7 @@ const navItems = [
 export default function   Navbar() {
   const [active, setActive] = useState('/');
   const { theme, setTheme } = useTheme();
-  const [Logo, setLogo] = useState<string>(theme === 'dark'? '/white_logo.svg' : '/black_logo.svg' )
+  const [Logo, setLogo] = useState<string>( '/black_logo.svg' )
   useEffect(()=>{
     theme === 'dark' ?setLogo('/white_logo.svg'):setLogo('/black_logo.svg')
   },[theme])

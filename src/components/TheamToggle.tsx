@@ -6,9 +6,13 @@ import { Button } from '@/components/ui/button';
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const [Icon, setIcon] = useState(<Sun/>)
+  useEffect(()=>{
+    theme === 'dark' ? setIcon(<Sun/>) : setIcon(<Moon/>)
+  },[theme])
   return (
     <Button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-      {theme == 'dark'? <Sun/> : <Moon/>}
+      {Icon}
     </Button>
   );
 }
